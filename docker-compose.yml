@@ -1,0 +1,29 @@
+# versão de compatibilidade dos comandos aqui do arquivo
+# com a versão do docker-compose
+version: '3'
+
+services:  
+  # aqui nos definimos servidor do node
+  node-server:
+    restart: always
+    build: .
+    
+    # aqui diz qual o nome do container 
+    container_name: node-server-status-services
+  
+    # aqui diz para depois que for copiado os arquivos do projeto no container 
+    # ele execultar os comandos desse arquivo no shell do container
+    # entrypoint: ./.docker/entrypoint.sh
+    command: >
+      sh -c "npm i && 
+            ls &&        
+            yarn start"
+    
+    # copia os arquivos do projeto para o container
+    # os comandos antes do sinal de dois pontos : 
+    # é o endereço dos arquivos na sua maquina
+    # e apos os dois pontos é o caminho para onde
+    # os arquivos serão copiados no container
+    volumes:
+      - .:/home/node/service
+      - /home/node/service/node_modules
