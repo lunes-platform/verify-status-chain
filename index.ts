@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 import rows from "./wss-conf.json"
 // Import
 import { ApiPromise, WsProvider } from '@polkadot/api';
@@ -29,10 +29,12 @@ const verifyStatus = async () => {
       listWSS.push(api)
     }
     let countError = 0;
+    console.log(process.env.EMAIL_FROM)
     setInterval(async () => {
       let wss = "";
+
       try {
-        countError += 1
+       
         for (let index = 0; index < listWSS.length; index++) {
           const element = listWSS[index];
           wss = rows[index].wss;
@@ -49,12 +51,14 @@ const verifyStatus = async () => {
         }
         countError = 0
       } catch (error:any) {
+        countError += 1
+        console.log("erro",countError)
         if(countError==3)
           sendEmail("Erro : "+wss +"\n"+error.message, wss)  
         console.log(error)
       }
 
-    }, 50000);
+    }, 2000);
 
   } catch (error) {
     console.log(error)
@@ -72,8 +76,7 @@ const sendEmail = async (message:string, subject:string) =>{
   
     console.log("Message sent: %s", info.messageId);
   } catch (error) {
-    console.log(message)
-    console.log(error)
+    console.log("erro envio",error)
   }
 }
 verifyStatus()

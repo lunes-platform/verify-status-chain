@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@polkadot/api": "^10.13.1",
+    "dotenv": "^16.4.5",
     "nodemailer": "^6.9.13",
     "ts-node": "^10.9.2"
   },
