@@ -1,0 +1,9 @@
+[
+    {
+        "ip":"62.169.18.138",
+        "wss":"wss://ws-test.lunes.io",
+        "name":"teste",
+        "archive":true,
+        "status":true
+    }
+]
